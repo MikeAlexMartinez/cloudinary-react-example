@@ -10,6 +10,8 @@ class Home extends Component {
     this.state = {
       gallery: [],
     };
+
+    this.uploadWidget = this.uploadWidget.bind(this);
   }
 
   componentDidMount(){
@@ -17,13 +19,28 @@ class Home extends Component {
       .then((res) => {
         console.log(res.data.resources);
         this.setState({ gallery: res.data.resources });
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
+  uploadWidget() {
+    cloudinary.openUploadWidget({ cloud_name: 'di6bv5utg', upload_preset: 'testing_123', tags: ['test']},
+      function(error, result) {
+        console.log(result);
+      });
+  }
+ 
   render() {
       return (
           <div className="main">
               <h1>Galleria</h1>
+              <div className="upload">
+                <button onClick={this.uploadWidget()} className="upload-button">
+                  Add Image
+                </button>
+              </div>
               <div className="gallery">
                 <CloudinaryContext cloudName="di6bv5utg">
                   {

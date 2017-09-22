@@ -82,6 +82,8 @@
 	    _this.state = {
 	      gallery: []
 	    };
+	
+	    _this.uploadWidget = _this.uploadWidget.bind(_this);
 	    return _this;
 	  }
 	
@@ -93,6 +95,15 @@
 	      _axios2.default.get('http://res.cloudinary.com/di6bv5utg/image/list/test.json').then(function (res) {
 	        console.log(res.data.resources);
 	        _this2.setState({ gallery: res.data.resources });
+	      }).catch(function (err) {
+	        console.log(err);
+	      });
+	    }
+	  }, {
+	    key: 'uploadWidget',
+	    value: function uploadWidget() {
+	      cloudinary.openUploadWidget({ cloud_name: 'di6bv5utg', upload_preset: 'testing_123', tags: ['test'] }, function (error, result) {
+	        console.log(result);
 	      });
 	    }
 	  }, {
@@ -105,6 +116,15 @@
 	          'h1',
 	          null,
 	          'Galleria'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'upload' },
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.uploadWidget(), className: 'upload-button' },
+	            'Add Image'
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',

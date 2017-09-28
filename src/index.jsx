@@ -3,12 +3,15 @@ import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
 import { render } from 'react-dom';
 import axios from 'axios';
 
+const mainFolder = '/project-mam/';
+
 class Home extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       gallery: [],
+      folder: 'test',
     };
 
     this.uploadWidget = this.uploadWidget.bind(this);
@@ -26,7 +29,8 @@ class Home extends Component {
   }
 
   uploadWidget() {
-    cloudinary.openUploadWidget({ cloud_name: 'di6bv5utg', upload_preset: 'testing_123', tags: ['test']},
+    const folder = mainFolder + this.state.folder;
+    cloudinary.openUploadWidget({ cloud_name: 'di6bv5utg', upload_preset: 'testing_123', tags: ['test'], folder: folder, theme: 'minimal'},
       function(error, result) {
         console.log(result);
       });
@@ -37,7 +41,7 @@ class Home extends Component {
           <div className="main">
               <h1>Galleria</h1>
               <div className="upload">
-                <button onClick={this.uploadWidget()} className="upload-button">
+                <button onClick={this.uploadWidget} className="upload-button">
                   Add Image
                 </button>
               </div>

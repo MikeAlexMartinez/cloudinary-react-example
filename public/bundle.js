@@ -71,6 +71,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var mainFolder = '/project-mam/';
+	
 	var Home = function (_Component) {
 	  _inherits(Home, _Component);
 	
@@ -80,7 +82,8 @@
 	    var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 	
 	    _this.state = {
-	      gallery: []
+	      gallery: [],
+	      folder: 'test'
 	    };
 	
 	    _this.uploadWidget = _this.uploadWidget.bind(_this);
@@ -102,7 +105,8 @@
 	  }, {
 	    key: 'uploadWidget',
 	    value: function uploadWidget() {
-	      cloudinary.openUploadWidget({ cloud_name: 'di6bv5utg', upload_preset: 'testing_123', tags: ['test'] }, function (error, result) {
+	      var folder = mainFolder + this.state.folder;
+	      cloudinary.openUploadWidget({ cloud_name: 'di6bv5utg', upload_preset: 'testing_123', tags: ['test'], folder: folder, theme: 'minimal' }, function (error, result) {
 	        console.log(result);
 	      });
 	    }
@@ -122,7 +126,7 @@
 	          { className: 'upload' },
 	          _react2.default.createElement(
 	            'button',
-	            { onClick: this.uploadWidget(), className: 'upload-button' },
+	            { onClick: this.uploadWidget, className: 'upload-button' },
 	            'Add Image'
 	          )
 	        ),

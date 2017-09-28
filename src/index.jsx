@@ -3,8 +3,6 @@ import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
 import { render } from 'react-dom';
 import axios from 'axios';
 
-const mainFolder = '/project-mam/';
-
 class Home extends Component {
 
   constructor(props) {
@@ -29,7 +27,7 @@ class Home extends Component {
   }
 
   uploadWidget() {
-    const folder = mainFolder + this.state.folder;
+    const { folder } = this.state;
     cloudinary.openUploadWidget({ cloud_name: 'di6bv5utg', upload_preset: 'testing_123', tags: ['test'], folder: folder, theme: 'minimal'},
       function(error, result) {
         console.log(result);
